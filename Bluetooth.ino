@@ -20,7 +20,7 @@ void setup()
 {
 myservo.attach(9);
 //Setup usb serial connection to computer
-Serial.begin(9600);
+Serial.begin(4800);
 
 //Setup Bluetooth serial connection to android
 bluetooth.begin(9600);
@@ -32,10 +32,11 @@ void loop()
 if(bluetooth.available()> 0 )
 {
   servopos = bluetooth.read();
+  //Serial.println("servopos: " + servopos);
 }
 
 lightSensor = analogRead(lightSensorPin);
-//Serial.println("lightSensor: " + lightSensor);
+Serial.println(lightSensor);
 
 
 if(lightSensor < 500){ //If it is dark for a significant amount of time the user is assumed asleep, the door is automatically locked
@@ -44,7 +45,7 @@ if(lightSensor < 500){ //If it is dark for a significant amount of time the user
   myservo.write(servopos);  
 }
 
-//Serial.println("servopos: " + servopos);
+
 
 }
 
